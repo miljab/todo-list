@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.project-name-input-div {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.shown {
+    visibility: visible;
+    width: 200px;
+    height: 60px;
+    resize: none;
+}
+
+.input-div {
+    display: grid;
+    grid-template-columns: 200px 20px 110px 70px 20px;
+    gap: 5px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+}
+
+.header-with-back, .header-no-back {
+    background-color: rgb(30, 98, 177);
+    color: rgb(245, 245, 245);
+    height: 100px;
+    font-size: 30px;
+    box-shadow: 0px 2px 2px 0px #474747;
+    position: relative;
+}
+
+.header-with-back {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+}
+
+.header-no-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-img {
+    width: 40px;
+}
+
+#add-project-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    border: none;
+    background-color: orange;
+    color: white;
+    font-size: 40px;
+}
+
+#add-project-button:hover {
+    background-color: rgb(255, 190, 68);
+    cursor: pointer;
+}
+
+#content {
+    background-color: rgb(39, 39, 39);
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 30px;
+}
+
+.project-div {
+    background-color: rgb(224, 224, 224);
+    height: 400px;
+    width: 400px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 3px 3px 3px 0px #5c5c5c;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+.project-outer-div {
+    height: 420px;
+    width: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.project-outer-div:hover {
+    border: solid rgb(224, 224, 224) 3px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+ul {
+    list-style-position: inside;
+    line-height: 20px;
+}
+
+.project-date-span {
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.project-div h2 {
+    margin-bottom: 2px;
+}
