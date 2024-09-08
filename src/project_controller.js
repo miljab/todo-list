@@ -17,6 +17,7 @@ export function saveProjectToLocalStorage(elements) {
         tasks.push(newTask);
     }
 
+    tasks.sort(sortTasks);
     let newProject = Project(elements["project_name"].value, elements["project_date"].value, tasks, false);
 
     projects.push(newProject);
@@ -43,8 +44,10 @@ export function sortTasks(a, b) {
     const value = {
         "low": 0,
         "normal": 1,
-        "high": 2
+        "high": 2,
+        false: 0,
+        true: -3,
     };
 
-    return value[b.priority] - value[a.priority];
+    return (value[b.priority] + value[b.done]) - (value[a.priority] + value[a.done]);
 }
