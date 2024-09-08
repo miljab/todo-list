@@ -2,36 +2,33 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Montserrat", sans-serif;
 }
 
 .project-name-input-div {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    gap: 5px;
+    border-bottom: 1px solid rgb(202, 202, 202);
 }
 
 .hidden {
     visibility: hidden;
     width: 0;
-    height: 0;
+    height: 0 !important;
 }
 
 .shown {
     visibility: visible;
     width: 200px;
     height: 60px;
-    resize: none;
-}
-
-.input-div {
-    display: grid;
-    grid-template-columns: 200px 20px 110px 70px 20px;
-    gap: 5px;
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: "Montserrat", sans-serif;
 }
 
 .header-with-back, .header-no-back {
@@ -45,7 +42,9 @@ body {
 
 .header-with-back {
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 100px 1fr;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-no-back {
@@ -69,9 +68,10 @@ body {
     background-color: orange;
     color: white;
     font-size: 40px;
+    z-index: 100;
 }
 
-#add-project-button:hover {
+#add-project-button:hover, #new-task-input-button:hover {
     background-color: rgb(255, 190, 68);
     cursor: pointer;
 }
@@ -128,4 +128,147 @@ ul {
 
 .project-div h2 {
     margin-bottom: 2px;
+}
+
+.back-button {
+    background-color: rgb(30, 98, 177);
+    border: none;
+    border-right: 1px solid rgb(82, 152, 233);
+    width: 100px;
+    height: 100px;
+}
+
+.back-button:hover {
+    background-color: rgb(44, 121, 209);
+    cursor: pointer;
+}
+
+.header-with-back h1{
+    margin: auto;
+}
+
+#new-project-form {
+    background-color: rgb(224, 224, 224);
+    display: grid;
+    grid-template-rows: fit-content(200px) 100px 1fr;
+    min-height: 70vh;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 3px 0px rgb(80, 80, 80);
+}
+
+#new-task-input-button {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    background-color: orange;
+    border: none;
+    border-radius: 25%;
+    color: white;
+    font-size: 24px;
+    box-shadow: 2px 2px 2px 0px rgb(146, 146, 146);
+}
+
+#buttons-div {
+    display: flex;
+    justify-content: right;
+    align-items: end;
+}
+
+#save-button {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(30, 98, 177);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 2px 2px 2px 0px rgb(146, 146, 146);
+}
+
+#save-button:hover {
+    background-color: rgb(44, 121, 209);
+    cursor: pointer;
+}
+
+.text-input {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    padding: 20px;
+    border: none;
+    font-size: 16px;
+}
+
+.text-input:focus {
+    outline: solid 2px rgb(30, 98, 177);
+}
+
+.input-div {
+    display: grid;
+    grid-template-columns: 1fr 40px 130px 70px 40px;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.desc-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #ffffff;
+}
+
+.desc-button:hover {
+    cursor: pointer;
+    background-color: #e6e6e6;
+}
+
+.desc-icon {
+    width: 100%;
+}
+
+.date-input {
+    border-radius: 20px;
+    border: none;
+    padding: 0px 10px;
+}
+
+.description-input {
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    padding: 5px 20px;
+    font-size: 16px;
+    resize: none;
+    overflow: hidden;
+    height: 48px;
+}
+
+.description-input:focus {
+    outline: 1px solid rgb(90, 90, 90);
+}
+
+.priority-select {
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.remove-task-button {
+    border: none;
+    font-size: 32px;
+    font-weight: 700;
+    height: 40px;
+    color: red;
+    background-color: inherit;
+}
+
+.task-done {
+    color: red;
 }

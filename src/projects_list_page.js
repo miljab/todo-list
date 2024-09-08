@@ -1,4 +1,5 @@
 import { buildNewProjectPage } from "./add_project_page";
+import { buildProjectPage } from "./project_page";
 
 export function buildProjectsListPage() {
     let projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
@@ -25,6 +26,8 @@ export function buildProjectsListPage() {
     for (let i = 0; i < projects.length; i++) {
         let projectOuterDiv = document.createElement("div");
         projectOuterDiv.classList.add("project-outer-div");
+
+        projectOuterDiv.addEventListener("click", () => buildProjectPage(i));
 
         let projectDiv = document.createElement("div");
         projectDiv.classList.add("project-div");

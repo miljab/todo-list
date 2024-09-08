@@ -1,27 +1,11 @@
 import { buildProjectsListPage } from "./projects_list_page";
 
 function Project(name, deadline, tasks, done) {
-    const addTask = (task) => {
-        tasks.push(task);
-    };
-
-    const removeTask = (index) => {
-        tasks.splice(index, 1);
-    };
-
-    const changeStatus = () => {
-        done = !done;
-    };
-
-    return {name, deadline, tasks, done, addTask, removeTask, changeStatus};
+    return {name, deadline, tasks, done};
 }
 
 function Task(name, desc, priority, deadline, done) {
-    const changeStatus = () => {
-        done = !done;
-    };
-
-    return {name, desc, priority, deadline, done, changeStatus};
+    return {name, desc, priority, deadline, done};
 }
 
 export function saveProjectToLocalStorage(elements) {
@@ -39,4 +23,8 @@ export function saveProjectToLocalStorage(elements) {
     localStorage.setItem("projects", JSON.stringify(projects));
 
     buildProjectsListPage();
+}
+
+export function updateProjectsLocalStorage(projects) {
+    localStorage.setItem("projects", JSON.stringify(projects));
 }

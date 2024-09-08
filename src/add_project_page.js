@@ -1,6 +1,7 @@
 import { saveProjectToLocalStorage } from "./project_controller";
 import { buildProjectsListPage } from "./projects_list_page";
 import backIcon from './images/back.png';
+import descIcon from './images/desc.png';
 
 export function buildNewProjectPage() {
     const header = document.querySelector("header");
@@ -47,7 +48,8 @@ function formManager() {
 
     const addNewTaskInputButton = document.createElement("button");
     addNewTaskInputButton.type = "button";
-    addNewTaskInputButton.textContent = "+"
+    addNewTaskInputButton.textContent = "+";
+    addNewTaskInputButton.id = "new-task-input-button";
     addNewTaskInputButton.addEventListener("click", () => inputsDiv.appendChild(createTaskInput()));
 
     form.appendChild(inputsDiv);
@@ -59,6 +61,7 @@ function formManager() {
     const saveButton = document.createElement("button");
     saveButton.type = "submit";
     saveButton.textContent = "SAVE";
+    saveButton.id = "save-button";
 
     buttonsDiv.appendChild(saveButton);
 
@@ -76,6 +79,8 @@ function projectNameInput() {
     let inputDiv = document.createElement("div");
     inputDiv.classList.add("project-name-input-div");
     let input = document.createElement("input");
+    input.classList.add("text-input");
+    input.tabIndex = 1;
     input.type = "text";
     input.placeholder = "Project name...";
     input.maxLength = 70;
@@ -87,6 +92,7 @@ function projectNameInput() {
     let minDate = new Date().toJSON().slice(0, 10);
 
     let inputDate = document.createElement("input");
+    inputDate.classList.add("date-input");
     inputDate.type = "date";
     inputDate.name = "project_date";
     inputDate.min = minDate;
@@ -102,6 +108,8 @@ function createTaskInput() {
     let inputDiv = document.createElement("div");
     inputDiv.classList.add("input-div");
     let input = document.createElement("input");
+    input.classList.add("text-input");
+    input.tabIndex = 1;
     input.type = "text";
     input.placeholder = "Task...";
     input.maxLength = 120;
@@ -114,10 +122,22 @@ function createTaskInput() {
     descriptionInput.classList.add("description-input");
     descriptionInput.classList.add("hidden");
     descriptionInput.name = "task_desc";
+    descriptionInput.placeholder = "Description...";
+
+    descriptionInput.addEventListener("input", () => {
+            descriptionInput.style.height = "auto";
+            descriptionInput.style.height = descriptionInput.scrollHeight + "px";
+    }, false);
 
     let descriptionButton = document.createElement("button");
+    descriptionButton.classList.add("desc-button");
     descriptionButton.type = "button";
-    descriptionButton.textContent = "D";
+    
+    let descriptionIcon = document.createElement("img");
+    descriptionIcon.src = descIcon;
+    descriptionIcon.classList.add("desc-icon");
+    descriptionButton.appendChild(descriptionIcon);
+
     descriptionButton.addEventListener("click", () => {
         if (descriptionInput.classList.contains("hidden")) {
             descriptionInput.classList.remove("hidden");
@@ -131,6 +151,7 @@ function createTaskInput() {
     let minDate = new Date().toJSON().slice(0, 10);
 
     let inputDate = document.createElement("input");
+    inputDate.classList.add("date-input");
     inputDate.type = "date";
     inputDate.name = "task_date";
     inputDate.min = minDate;
