@@ -28,3 +28,13 @@ export function saveProjectToLocalStorage(elements) {
 export function updateProjectsLocalStorage(projects) {
     localStorage.setItem("projects", JSON.stringify(projects));
 }
+
+export function daysToDeadline(date) {
+    const today = new Date();
+    const deadline = new Date(date);
+
+    const diffTime = Math.abs(deadline - today);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays;
+}

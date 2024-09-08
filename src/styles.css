@@ -270,5 +270,9 @@ ul {
 }
 
 .task-done {
-    color: red;
+    text-decoration: line-through;
+}
+
+.project-card {
+    background-color: rgb(224, 224, 224);
 }

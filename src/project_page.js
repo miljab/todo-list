@@ -1,5 +1,5 @@
 import { buildProjectsListPage } from './projects_list_page';
-import {updateProjectsLocalStorage} from './project_controller';
+import {updateProjectsLocalStorage, daysToDeadline} from './project_controller';
 import backIcon from './images/back.png';
 
 export function buildProjectPage(index) {
@@ -53,10 +53,10 @@ export function buildProjectPage(index) {
 
     projectSection.appendChild(removeButton);
 
-    if (project.date != "") {
+    if (project.deadline != "") {
         const projectDeadline = document.createElement("span");
         projectDeadline.classList.add("project-deadline");
-        projectDeadline.textContent = project.date;
+        projectDeadline.textContent = project.deadline;
 
         projectSection.appendChild(projectDeadline);
     }
@@ -97,6 +97,20 @@ export function buildProjectPage(index) {
             projects[index] = project;
             updateProjectsLocalStorage(projects);
         });
+
+        if (project.tasks[i].deadline != "")
+        {
+            const taskDeadline = document.createElement("span");
+            taskDeadline.textContent = project.tasks[i].deadline;
+            if (daysToDeadline(project.tasks[i].deadline) < 1) {
+                taskDeadline.style.color = "red";
+            } else if (daysToDeadline(project.tasks[i].deadline) < 3) {
+                taskDeadline.style.color = "orange";
+            }
+
+            taskDiv.appendChild(taskDeadline);
+        }
+        
 
         tasksSection.appendChild(taskDiv);
     }
