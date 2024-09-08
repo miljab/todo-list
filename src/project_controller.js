@@ -38,3 +38,13 @@ export function daysToDeadline(date) {
 
     return diffDays;
 }
+
+export function sortTasks(a, b) {
+    const value = {
+        "low": 0,
+        "normal": 1,
+        "high": 2
+    };
+
+    return value[b.priority] - value[a.priority];
+}

@@ -1,5 +1,5 @@
 import { buildProjectsListPage } from './projects_list_page';
-import {updateProjectsLocalStorage, daysToDeadline} from './project_controller';
+import {updateProjectsLocalStorage, daysToDeadline, sortTasks} from './project_controller';
 import backIcon from './images/back.png';
 
 export function buildProjectPage(index) {
@@ -11,6 +11,8 @@ export function buildProjectPage(index) {
 
     let projects = JSON.parse(localStorage.getItem("projects"));
     let project = projects[index];
+
+    project.tasks.sort(sortTasks);
 
     header.textContent = "";
     const h1 = document.createElement("h1");
@@ -96,18 +98,22 @@ export function buildProjectPage(index) {
             project.tasks[i].done = !project.tasks[i].done;
             projects[index] = project;
             updateProjectsLocalStorage(projects);
+            buildProjectPage(index);
         });
 
         if (project.tasks[i].deadline != "")
         {
             const taskDeadline = document.createElement("span");
             taskDeadline.textContent = project.tasks[i].deadline;
-            if (daysToDeadline(project.tasks[i].deadline) < 1) {
-                taskDeadline.style.color = "red";
-            } else if (daysToDeadline(project.tasks[i].deadline) < 3) {
-                taskDeadline.style.color = "orange";
-            }
+            if (!project.tasks[i].done) {
+                if (daysToDeadline(project.tasks[i].deadline) < 1) {
+                    taskDeadline.style.color = "red";
+                } else if (daysToDeadline(project.tasks[i].deadline) < 3) {
+                    taskDeadline.style.color = "orange";
+                }
+            } else taskDeadline.style.color = "gray";
 
+            
             taskDiv.appendChild(taskDeadline);
         }
         
