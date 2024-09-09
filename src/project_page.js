@@ -1,6 +1,7 @@
 import { buildProjectsListPage } from './projects_list_page';
 import {loadProjects, updateProjectsLocalStorage, daysToDeadline, sortTasks} from './project_controller';
 import backIcon from './images/back.png';
+import editIcon from './images/edit.png';
 
 export function buildProjectPage(index) {
     const header = document.querySelector("header");
@@ -49,6 +50,15 @@ export function buildProjectPage(index) {
 
     projectSection.appendChild(projectName);
 
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-project-button");
+    const editImg = document.createElement("img");
+    editImg.classList.add("edit-img");
+    editImg.src = editIcon;
+
+    editButton.appendChild(editImg);
+    projectSection.appendChild(editButton);
+
     const removeButton = document.createElement("button");
     removeButton.textContent = "X";
     removeButton.classList.add("remove-project-button");
@@ -56,15 +66,17 @@ export function buildProjectPage(index) {
 
     });
 
-    projectSection.appendChild(removeButton);
+    const removeButtonContainer = document.createElement("div");
+    removeButtonContainer.classList.add("remove-button-container");
 
-    if (project.deadline != "") {
-        const projectDeadline = document.createElement("span");
-        projectDeadline.classList.add("project-deadline");
-        projectDeadline.textContent = project.deadline;
+    removeButtonContainer.appendChild(removeButton);
+    projectSection.appendChild(removeButtonContainer);
 
-        projectSection.appendChild(projectDeadline);
-    }
+    const projectDeadline = document.createElement("span");
+    projectDeadline.classList.add("project-deadline");
+    projectDeadline.textContent = project.deadline;
+
+    projectSection.appendChild(projectDeadline);
 
     projectDiv.appendChild(projectSection);
 

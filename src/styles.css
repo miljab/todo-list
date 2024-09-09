@@ -274,5 +274,66 @@ ul {
 }
 
 .project-card {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(224, 224, 224);
+    display: grid;
+    grid-template-rows: fit-content(200px) 100px 1fr;
+    min-height: 70vh;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 3px 0px rgb(80, 80, 80);
+}
+
+.edit-project-button {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(224, 224, 224);
+    border: none;
+}
+
+.edit-project-button:hover {
+    cursor: pointer;
+}
+
+.edit-img {
+    width: 60%;
+    height: 60%;
+}
+
+.project-section {
+    display: grid;
+    grid-template-columns: auto 50px 1fr;
+    gap: 5px;
+    align-items: center;
+}
+
+.remove-button-container {
+    display: flex;
+    justify-content: right;
+}
+
+.remove-project-button {
+    width: 50px;
+    height: 50px;
+    color: rgb(224, 224, 224);
+    background-color: red;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 50%;
+    border: none;
+}
+
+.remove-project-button:hover {
+    cursor: pointer;
+    background-color: rgb(163, 11, 11);
+}
+
+.project-deadline {
+    grid-column: 1 / 4;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
 }
