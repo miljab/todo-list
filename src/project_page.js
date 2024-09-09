@@ -51,6 +51,7 @@ export function buildProjectPage(index) {
 
     const removeButton = document.createElement("button");
     removeButton.textContent = "X";
+    removeButton.classList.add("remove-project-button");
     // removeButton.addEventListener("click", () => {}); to do later
 
     projectSection.appendChild(removeButton);
@@ -101,27 +102,27 @@ export function buildProjectPage(index) {
             buildProjectPage(index);
         });
 
-        const prioritySelect = document.createElement("select");
-        prioritySelect.classList.add("priority-select");
-        prioritySelect.name = "task_prio";
-        const selectOptions = ["low", "normal", "high"];
+        // const prioritySelect = document.createElement("select");
+        // prioritySelect.classList.add("priority-select");
+        // prioritySelect.name = "task_prio";
+        // const selectOptions = ["low", "normal", "high"];
 
-        for (let j = 0; j < selectOptions.length; j++) {
-            let option = document.createElement("option");
-            option.value = selectOptions[j];
-            option.text = selectOptions[j];
-            if (project.tasks[i].priority == selectOptions[j]) option.selected = true;
-            prioritySelect.appendChild(option);
-        }
+        // for (let j = 0; j < selectOptions.length; j++) {
+        //     let option = document.createElement("option");
+        //     option.value = selectOptions[j];
+        //     option.text = selectOptions[j];
+        //     if (project.tasks[i].priority == selectOptions[j]) option.selected = true;
+        //     prioritySelect.appendChild(option);
+        // }
 
-        prioritySelect.addEventListener("change", () => {
-            project.tasks[i].priority = prioritySelect.value;
-            projects[index] = project;
-            updateProjectsLocalStorage(projects);
-            buildProjectPage(index);
-        });
+        // prioritySelect.addEventListener("change", () => {
+        //     project.tasks[i].priority = prioritySelect.value;
+        //     projects[index] = project;
+        //     updateProjectsLocalStorage(projects);
+        //     buildProjectPage(index);
+        // });
 
-        taskDiv.appendChild(prioritySelect);
+        // taskDiv.appendChild(prioritySelect);
 
         if (project.tasks[i].deadline != "")
         {
@@ -138,6 +139,19 @@ export function buildProjectPage(index) {
             
             taskDiv.appendChild(taskDeadline);
         }
+
+        const removeTaskButton = document.createElement("button");
+        removeTaskButton.classList.add("remove-task-button");
+        removeTaskButton.textContent = "X";
+
+        removeTaskButton.addEventListener("click", () => {
+            project.tasks.splice(i, 1);
+            projects[index] = project;
+            updateProjectsLocalStorage(projects);
+            buildProjectPage(index);
+        });
+
+        taskDiv.appendChild(removeTaskButton);
         
 
         tasksSection.appendChild(taskDiv);
