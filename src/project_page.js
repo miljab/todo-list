@@ -14,6 +14,8 @@ export function buildProjectPage(index) {
     let projects = loadProjects();
     let project = projects[index];
 
+    const dialog = createModal(index);
+
     header.textContent = "";
     const h1 = document.createElement("h1");
     h1.textContent = "Project To-Do List";
@@ -62,7 +64,6 @@ export function buildProjectPage(index) {
     removeButton.textContent = "X";
     removeButton.classList.add("remove-project-button");
     removeButton.addEventListener("click", () => {
-        const dialog = createModal(index);
         document.querySelector("body").appendChild(dialog);
         dialog.showModal();
     });
@@ -126,9 +127,11 @@ export function buildProjectPage(index) {
             buildProjectPage(index);
         });
 
+        const taskDeadline = document.createElement("span");
+        taskDeadline.classList.add("task-deadline-span");
+
         if (project.tasks[i].deadline != "")
         {
-            const taskDeadline = document.createElement("span");
             taskDeadline.textContent = project.tasks[i].deadline;
             if (!project.tasks[i].done) {
                 if (daysToDeadline(project.tasks[i].deadline) < 1) {
@@ -137,10 +140,12 @@ export function buildProjectPage(index) {
                     taskDeadline.style.color = "orange";
                 }
             } else taskDeadline.style.color = "gray";
-
-            
-            taskDiv.appendChild(taskDeadline);
         }
+
+        taskDiv.appendChild(taskDeadline);
+
+        const removeTaskButtonContainer = document.createElement("div");
+        removeTaskButtonContainer.classList.add("remove-task-button-container");
 
         const removeTaskButton = document.createElement("button");
         removeTaskButton.classList.add("remove-task-button");
@@ -154,7 +159,8 @@ export function buildProjectPage(index) {
             buildProjectPage(index);
         });
 
-        taskDiv.appendChild(removeTaskButton);
+        removeTaskButtonContainer.appendChild(removeTaskButton);
+        taskDiv.appendChild(removeTaskButtonContainer);
 
         const descDiv = document.createElement("div");
         descDiv.classList.add("desc-div");

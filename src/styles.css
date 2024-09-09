@@ -14,12 +14,16 @@
 }
 
 .hidden {
+    display: none;
     visibility: hidden;
     width: 0;
     height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .shown {
+    display: block;
     visibility: visible;
 }
 
@@ -269,6 +273,7 @@ ul {
 
 .task-done {
     text-decoration: line-through;
+    color: rgb(124, 124, 124);
 }
 
 .project-card {
@@ -276,7 +281,7 @@ ul {
     flex-direction: column;
     background-color: rgb(224, 224, 224);
     display: grid;
-    grid-template-rows: fit-content(200px) 100px 1fr;
+    grid-template-rows: 100px fit-content(200px);
     min-height: 70vh;
     height: 100%;
     width: 80%;
@@ -307,6 +312,13 @@ ul {
     grid-template-columns: auto 50px 1fr;
     gap: 5px;
     align-items: center;
+}
+
+.tasks-section {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .remove-button-container {
@@ -404,4 +416,42 @@ ul {
 .dialog-cancel-button:hover {
     cursor: pointer;
     background-color: rgb(231, 231, 231);
+}
+
+.task-div {
+    display: grid;
+    grid-template-columns: 30px 850px 1fr 50px;
+    gap: 10px;
+    align-items: center;
+}
+
+.remove-task-button-container {
+    display: flex;
+    justify-content: right;
+}
+
+.task-checkbox {
+    width: 25px;
+    height: 25px;
+}
+
+.task-deadline-span {
+    display: flex;
+    justify-content: right;
+}
+
+.desc-div {
+    grid-column: 1 / 4;
+    border: dashed 1px black;
+    border-top: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.task-name-span {
+    font-size: 18px;
+}
+
+.task-name-span:hover {
+    cursor: pointer;
 }
