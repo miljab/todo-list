@@ -1,6 +1,7 @@
 import { buildNewProjectPage } from "./add_project_page";
-import { loadProjects } from "./project_controller";
+import { loadProjects, daysToDeadline } from "./project_controller";
 import { buildProjectPage } from "./project_page";
+import alertIcon from './images/alert.png';
 
 export function buildProjectsListPage() {
     let projects = loadProjects();
@@ -42,6 +43,15 @@ export function buildProjectsListPage() {
         let projectDate = document.createElement("span");
         projectDate.textContent = projects[i].deadline;
         projectDate.classList.add("project-date-span");
+
+        if (projects[i].deadline != "" && daysToDeadline(projects[i].deadline) < 1) {
+            projectDate.style.color = "red";
+            const alertImg = document.createElement("img");
+            alertImg.src = alertIcon;
+            alertImg.classList.add("alert-img");
+            projectDate.appendChild(alertImg);
+        }
+
         projectDiv.appendChild(projectDate);
 
         let projectTasks = document.createElement("ul");
