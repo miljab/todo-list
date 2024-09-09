@@ -95,9 +95,7 @@ export function buildProjectPage(index) {
                 taskName.classList.remove("task-done");
             }
 
-            console.log(project.tasks[i].done);
             project.tasks[i].changeStatus();
-            console.log(project.tasks[i].done);
             projects[index] = project;
             updateProjectsLocalStorage(projects);
             buildProjectPage(index);

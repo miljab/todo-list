@@ -1,7 +1,17 @@
 import { buildProjectsListPage } from "./projects_list_page";
 
 function Project(name, deadline, tasks, done) {
-    return {name, deadline, tasks, done};
+    function checkStatus() {
+        for (let i = 0; i < this.tasks.length; i++) {
+            if (!this.tasks[i].done) {
+                return this.done = false;
+            }
+        }
+
+        return this.done = true;
+    }
+
+    return {name, deadline, tasks, done, checkStatus};
 }
 
 function Task(name, desc, priority, deadline, done) {
