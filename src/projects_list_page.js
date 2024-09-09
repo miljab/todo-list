@@ -1,8 +1,9 @@
 import { buildNewProjectPage } from "./add_project_page";
+import { loadProjects } from "./project_controller";
 import { buildProjectPage } from "./project_page";
 
 export function buildProjectsListPage() {
-    let projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
+    let projects = loadProjects();
 
     const header = document.querySelector("header");
     header.textContent = "";

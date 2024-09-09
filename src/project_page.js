@@ -1,5 +1,5 @@
 import { buildProjectsListPage } from './projects_list_page';
-import {updateProjectsLocalStorage, daysToDeadline, sortTasks} from './project_controller';
+import {loadProjects, updateProjectsLocalStorage, daysToDeadline, sortTasks} from './project_controller';
 import backIcon from './images/back.png';
 
 export function buildProjectPage(index) {
@@ -9,7 +9,7 @@ export function buildProjectPage(index) {
         header.classList.add("header-with-back");
     }
 
-    let projects = JSON.parse(localStorage.getItem("projects"));
+    let projects = loadProjects();
     let project = projects[index];
 
     project.tasks.sort(sortTasks);
@@ -95,7 +95,9 @@ export function buildProjectPage(index) {
                 taskName.classList.remove("task-done");
             }
 
-            project.tasks[i].done = !project.tasks[i].done;
+            console.log(project.tasks[i].done);
+            project.tasks[i].changeStatus();
+            console.log(project.tasks[i].done);
             projects[index] = project;
             updateProjectsLocalStorage(projects);
             buildProjectPage(index);
