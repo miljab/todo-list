@@ -69,16 +69,16 @@ export function buildProjectPage(index) {
     tasksSection.classList.add("tasks-section");
 
     for (let i = 0; i < project.tasks.length; i++) {
-        let taskDiv = document.createElement("div");
+        const taskDiv = document.createElement("div");
         taskDiv.classList.add("task-div");
 
-        let checkbox = document.createElement("input");
+        const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.classList.add("task-checkbox");
 
         taskDiv.appendChild(checkbox);
 
-        let taskName = document.createElement("span");
+        const taskName = document.createElement("span");
         taskName.classList.add("task-name-span");
         if (project.tasks[i].done) {
             taskName.classList.add("task-done");
@@ -100,6 +100,28 @@ export function buildProjectPage(index) {
             updateProjectsLocalStorage(projects);
             buildProjectPage(index);
         });
+
+        const prioritySelect = document.createElement("select");
+        prioritySelect.classList.add("priority-select");
+        prioritySelect.name = "task_prio";
+        const selectOptions = ["low", "normal", "high"];
+
+        for (let j = 0; j < selectOptions.length; j++) {
+            let option = document.createElement("option");
+            option.value = selectOptions[j];
+            option.text = selectOptions[j];
+            if (project.tasks[i].priority == selectOptions[j]) option.selected = true;
+            prioritySelect.appendChild(option);
+        }
+
+        prioritySelect.addEventListener("change", () => {
+            project.tasks[i].priority = prioritySelect.value;
+            projects[index] = project;
+            updateProjectsLocalStorage(projects);
+            buildProjectPage(index);
+        });
+
+        taskDiv.appendChild(prioritySelect);
 
         if (project.tasks[i].deadline != "")
         {

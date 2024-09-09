@@ -76,9 +76,9 @@ function formManager() {
 }
 
 function projectNameInput() {
-    let inputDiv = document.createElement("div");
+    const inputDiv = document.createElement("div");
     inputDiv.classList.add("project-name-input-div");
-    let input = document.createElement("input");
+    const input = document.createElement("input");
     input.classList.add("text-input");
     input.tabIndex = 1;
     input.type = "text";
@@ -89,9 +89,9 @@ function projectNameInput() {
     input.name = "project_name";
     input.classList.add("new-project-input");
 
-    let minDate = new Date().toJSON().slice(0, 10);
+    const minDate = new Date().toJSON().slice(0, 10);
 
-    let inputDate = document.createElement("input");
+    const inputDate = document.createElement("input");
     inputDate.classList.add("date-input");
     inputDate.type = "date";
     inputDate.name = "project_date";
@@ -105,9 +105,9 @@ function projectNameInput() {
 }
 
 function createTaskInput() {
-    let inputDiv = document.createElement("div");
+    const inputDiv = document.createElement("div");
     inputDiv.classList.add("input-div");
-    let input = document.createElement("input");
+    const input = document.createElement("input");
     input.classList.add("text-input");
     input.tabIndex = 1;
     input.type = "text";
@@ -118,7 +118,7 @@ function createTaskInput() {
     input.name = "task_name";
     input.classList.add("new-task-input");
     
-    let descriptionInput = document.createElement("textarea");
+    const descriptionInput = document.createElement("textarea");
     descriptionInput.classList.add("description-input");
     descriptionInput.classList.add("hidden");
     descriptionInput.name = "task_desc";
@@ -129,11 +129,11 @@ function createTaskInput() {
             descriptionInput.style.height = descriptionInput.scrollHeight + "px";
     }, false);
 
-    let descriptionButton = document.createElement("button");
+    const descriptionButton = document.createElement("button");
     descriptionButton.classList.add("desc-button");
     descriptionButton.type = "button";
     
-    let descriptionIcon = document.createElement("img");
+    const descriptionIcon = document.createElement("img");
     descriptionIcon.src = descIcon;
     descriptionIcon.classList.add("desc-icon");
     descriptionButton.appendChild(descriptionIcon);
@@ -148,18 +148,18 @@ function createTaskInput() {
         }
     })
 
-    let minDate = new Date().toJSON().slice(0, 10);
+    const minDate = new Date().toJSON().slice(0, 10);
 
-    let inputDate = document.createElement("input");
+    const inputDate = document.createElement("input");
     inputDate.classList.add("date-input");
     inputDate.type = "date";
     inputDate.name = "task_date";
     inputDate.min = minDate;
 
-    let prioritySelect = document.createElement("select");
+    const prioritySelect = document.createElement("select");
     prioritySelect.classList.add("priority-select");
     prioritySelect.name = "task_prio";
-    let selectOptions = ["low", "normal", "high"];
+    const selectOptions = ["low", "normal", "high"];
 
     for (let i = 0; i < selectOptions.length; i++) {
         let option = document.createElement("option");
@@ -169,7 +169,7 @@ function createTaskInput() {
         prioritySelect.appendChild(option);
     }
 
-    let removeTaskButton = document.createElement("button");
+    const removeTaskButton = document.createElement("button");
     removeTaskButton.type = "button";
     removeTaskButton.classList.add("remove-task-button");
     removeTaskButton.textContent = "X";
