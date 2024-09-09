@@ -52,7 +52,9 @@ export function buildProjectPage(index) {
     const removeButton = document.createElement("button");
     removeButton.textContent = "X";
     removeButton.classList.add("remove-project-button");
-    // removeButton.addEventListener("click", () => {}); to do later
+    removeButton.addEventListener("click", () => {
+
+    });
 
     projectSection.appendChild(removeButton);
 
@@ -85,7 +87,7 @@ export function buildProjectPage(index) {
             taskName.classList.add("task-done");
             checkbox.checked = true;
         }
-        taskName.textContent = project.tasks[i].name;
+        taskName.textContent = project.tasks[i].name;        
 
         taskDiv.appendChild(taskName);
 
@@ -97,32 +99,11 @@ export function buildProjectPage(index) {
             }
 
             project.tasks[i].changeStatus();
+            project.checkStatus();
             projects[index] = project;
             updateProjectsLocalStorage(projects);
             buildProjectPage(index);
         });
-
-        // const prioritySelect = document.createElement("select");
-        // prioritySelect.classList.add("priority-select");
-        // prioritySelect.name = "task_prio";
-        // const selectOptions = ["low", "normal", "high"];
-
-        // for (let j = 0; j < selectOptions.length; j++) {
-        //     let option = document.createElement("option");
-        //     option.value = selectOptions[j];
-        //     option.text = selectOptions[j];
-        //     if (project.tasks[i].priority == selectOptions[j]) option.selected = true;
-        //     prioritySelect.appendChild(option);
-        // }
-
-        // prioritySelect.addEventListener("change", () => {
-        //     project.tasks[i].priority = prioritySelect.value;
-        //     projects[index] = project;
-        //     updateProjectsLocalStorage(projects);
-        //     buildProjectPage(index);
-        // });
-
-        // taskDiv.appendChild(prioritySelect);
 
         if (project.tasks[i].deadline != "")
         {
@@ -146,13 +127,33 @@ export function buildProjectPage(index) {
 
         removeTaskButton.addEventListener("click", () => {
             project.tasks.splice(i, 1);
+            project.checkStatus();
             projects[index] = project;
             updateProjectsLocalStorage(projects);
             buildProjectPage(index);
         });
 
         taskDiv.appendChild(removeTaskButton);
+
+        const descDiv = document.createElement("div");
+        descDiv.classList.add("desc-div");
+        descDiv.classList.add("hidden");
+
+        if (project.tasks[i].desc != "") {
+            descDiv.textContent = project.tasks[i].desc;
+
+            taskName.addEventListener("click", () => {
+                if (descDiv.classList.contains("hidden")) {
+                    descDiv.classList.remove("hidden");
+                    descDiv.classList.add("shown");
+                } else {
+                    descDiv.classList.remove("shown");
+                    descDiv.classList.add("hidden");
+                }
+            });
+        }
         
+        taskDiv.appendChild(descDiv);
 
         tasksSection.appendChild(taskDiv);
     }
