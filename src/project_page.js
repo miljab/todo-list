@@ -1,5 +1,5 @@
 import { buildProjectsListPage } from './projects_list_page';
-import {loadProjects, updateProjectsLocalStorage, daysToDeadline} from './project_controller';
+import {loadProjects, updateProjectsLocalStorage, daysToDeadline, deleteProject} from './project_controller';
 import backIcon from './images/back.png';
 import editIcon from './images/edit.png';
 import alertIcon from './images/alert.png';
@@ -62,7 +62,9 @@ export function buildProjectPage(index) {
     removeButton.textContent = "X";
     removeButton.classList.add("remove-project-button");
     removeButton.addEventListener("click", () => {
-
+        const dialog = createModal(index);
+        document.querySelector("body").appendChild(dialog);
+        dialog.showModal();
     });
 
     const removeButtonContainer = document.createElement("div");
@@ -180,4 +182,39 @@ export function buildProjectPage(index) {
     projectDiv.appendChild(tasksSection);
 
     content.appendChild(projectDiv);    
+}
+
+function createModal(index) {
+    const dialog = document.createElement("dialog");
+    dialog.classList.add("remove-project-modal");
+
+    const dialogText = document.createElement("h3");
+    dialogText.classList.add("dialog-text");
+    dialogText.textContent = "Are you sure you want to delete this project?";
+
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("dialog-buttons-div");
+
+    const confirmButton = document.createElement("button");
+    confirmButton.classList.add("dialog-confirm-button");
+    confirmButton.textContent = "Confirm";
+
+    confirmButton.addEventListener("click", () => {
+        deleteProject(index)
+        dialog.close();
+    });
+
+    const cancelButton = document.createElement("button");
+    cancelButton.classList.add("dialog-cancel-button");
+    cancelButton.textContent = "Cancel";
+
+    cancelButton.addEventListener("click", () => dialog.close());
+
+    buttonsDiv.appendChild(confirmButton);
+    buttonsDiv.appendChild(cancelButton);
+
+    dialog.appendChild(dialogText);
+    dialog.appendChild(buttonsDiv);
+
+    return dialog;
 }

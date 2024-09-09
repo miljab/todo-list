@@ -85,3 +85,10 @@ function sortTasks(a, b) {
 
     return (value[b.priority] + value[b.done]) - (value[a.priority] + value[a.done]);
 }
+
+export function deleteProject(index) {
+    let projects = loadProjects();
+    projects.splice(index, 1);
+    updateProjectsLocalStorage(projects);
+    buildProjectsListPage();
+}
