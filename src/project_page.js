@@ -1,7 +1,8 @@
 import { buildProjectsListPage } from './projects_list_page';
-import {loadProjects, updateProjectsLocalStorage, daysToDeadline, sortTasks} from './project_controller';
+import {loadProjects, updateProjectsLocalStorage, daysToDeadline} from './project_controller';
 import backIcon from './images/back.png';
 import editIcon from './images/edit.png';
+import alertIcon from './images/alert.png';
 
 export function buildProjectPage(index) {
     const header = document.querySelector("header");
@@ -12,8 +13,6 @@ export function buildProjectPage(index) {
 
     let projects = loadProjects();
     let project = projects[index];
-
-    project.tasks.sort(sortTasks);
 
     header.textContent = "";
     const h1 = document.createElement("h1");
@@ -75,6 +74,14 @@ export function buildProjectPage(index) {
     const projectDeadline = document.createElement("span");
     projectDeadline.classList.add("project-deadline");
     projectDeadline.textContent = project.deadline;
+
+    if (project.deadline != "" && daysToDeadline(project.deadline) < 1) {
+        projectDeadline.style.color = "red";
+        const alertImg = document.createElement("img");
+        alertImg.src = alertIcon;
+        alertImg.classList.add("alert-img");
+        projectDeadline.appendChild(alertImg);
+    }
 
     projectSection.appendChild(projectDeadline);
 

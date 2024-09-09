@@ -21,8 +21,6 @@
 
 .shown {
     visibility: visible;
-    width: 200px;
-    height: 60px;
 }
 
 body {
@@ -336,4 +334,15 @@ ul {
     grid-column: 1 / 4;
     border-bottom: 1px solid black;
     padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.project-name {
+    font-size: 24px;
+}
+
+.alert-img {
+    width: 24px;
 }

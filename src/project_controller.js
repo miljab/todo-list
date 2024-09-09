@@ -26,12 +26,17 @@ export function saveProjectToLocalStorage(elements) {
     let projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
     let tasks = [];
 
-    for (let i = 0; i < elements["task_name"].length; i++) {
-        let newTask = Task(elements["task_name"][i].value, elements["task_desc"][i].value, elements["task_prio"][i].value, elements["task_date"][i].value, false);
-        tasks.push(newTask);
+    if (elements["task_name"].length != undefined) {
+        for (let i = 0; i < elements["task_name"].length; i++) {
+            let newTask = Task(elements["task_name"][i].value, elements["task_desc"][i].value, elements["task_prio"][i].value, elements["task_date"][i].value, false);
+            tasks.push(newTask);
+        }
+    } else {
+        let newTask = Task(elements["task_name"].value, elements["task_desc"].value, elements["task_prio"].value, elements["task_date"].value, false);
+            tasks.push(newTask);
     }
+   
 
-    tasks.sort(sortTasks);
     let newProject = Project(elements["project_name"].value, elements["project_date"].value, tasks, false);
 
     projects.push(newProject);
@@ -48,6 +53,7 @@ export function loadProjects() {
         for (let j = 0; j < projects[i].tasks.length; j++) {
             tasks[j] = Task(tasks[j].name, tasks[j].desc, tasks[j].priority, tasks[j].deadline, tasks[j].done);
         }
+        tasks.sort(sortTasks);
         projects[i] = Project(projects[i].name, projects[i].deadline, tasks, projects[i].done);
     }
 
@@ -68,7 +74,7 @@ export function daysToDeadline(date) {
     return diffDays;
 }
 
-export function sortTasks(a, b) {
+function sortTasks(a, b) {
     const value = {
         "low": 0,
         "normal": 1,
