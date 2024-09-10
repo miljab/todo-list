@@ -22,7 +22,7 @@ function Task(name, desc, priority, deadline, done) {
     return {name, desc, priority, deadline, done, changeStatus};
 }
 
-export function saveProjectToLocalStorage(elements) {
+export function saveProjectToLocalStorage(elements, index = 0) {
     const projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
     const tasks = [];
 
@@ -39,10 +39,8 @@ export function saveProjectToLocalStorage(elements) {
 
     const newProject = Project(elements["project_name"].value, elements["project_date"].value, tasks, false);
 
-    projects.push(newProject);
+    projects.splice(index, 0, newProject);
     localStorage.setItem("projects", JSON.stringify(projects));
-
-    buildProjectsListPage();
 }
 
 export function loadProjects() {

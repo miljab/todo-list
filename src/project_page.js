@@ -5,6 +5,7 @@ import editIcon from './images/edit.png';
 import alertIcon from './images/alert.png';
 import markDown from './images/chevron-down.png';
 import markUp from './images/chevron-up.png';
+import { buildEditProjectPage } from './edit_project_page';
 
 export function buildProjectPage(index) {
     const header = document.querySelector("header");
@@ -58,6 +59,8 @@ export function buildProjectPage(index) {
     const editImg = document.createElement("img");
     editImg.classList.add("edit-img");
     editImg.src = editIcon;
+
+    editButton.addEventListener("click", () => buildEditProjectPage(index));
 
     editButton.appendChild(editImg);
     projectSection.appendChild(editButton);

@@ -1,7 +1,8 @@
-import { saveProjectToLocalStorage } from "./project_controller";
+import { deleteProject, loadProjects, saveProjectToLocalStorage } from "./project_controller";
 import { buildProjectsListPage } from "./projects_list_page";
 import backIcon from './images/back.png';
 import descIcon from './images/desc.png';
+import { buildProjectPage } from "./project_page";
 
 export function buildNewProjectPage() {
     const header = document.querySelector("header");
@@ -36,15 +37,31 @@ export function buildNewProjectPage() {
 
 };
 
-export function formManager() {
+export function formManager(index) {
+    let edit;
+    let project;
+
+    if (index !== undefined) {
+        project = loadProjects()[index];
+        edit = true;
+    } else edit = false;
+
     const form = document.createElement("form");
     form.id = "new-project-form";
 
     const inputsDiv = document.createElement("div");
     inputsDiv.id = "form-inputs-div";
     
-    inputsDiv.appendChild(projectNameInput());
-    inputsDiv.appendChild(createTaskInput());
+    if (edit) {
+        inputsDiv.appendChild(projectNameInput(edit, project));
+        for (let i = 0; i < project.tasks.length; i++) {
+            inputsDiv.appendChild(createTaskInput(edit, project.tasks[i]));
+        }
+    } else {
+        inputsDiv.appendChild(projectNameInput());
+        inputsDiv.appendChild(createTaskInput());
+    }
+    
 
     const addNewTaskInputButton = document.createElement("button");
     addNewTaskInputButton.type = "button";
@@ -67,15 +84,22 @@ export function formManager() {
 
     form.appendChild(buttonsDiv);
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", (e) => { // !!!
         e.preventDefault();
-        saveProjectToLocalStorage(form.elements);
-    })
+        if (edit) {
+            deleteProject(index);
+            saveProjectToLocalStorage(form.elements, index);
+            buildProjectPage(index);
+        } else {
+            saveProjectToLocalStorage(form.elements);
+            buildProjectsListPage();
+        }
+    }) 
 
     return form;
 }
 
-export function projectNameInput() {
+export function projectNameInput(edit, project) {
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("project-name-input-div");
     const input = document.createElement("input");
@@ -87,7 +111,8 @@ export function projectNameInput() {
     input.minLength = 1;
     input.required = true;
     input.name = "project_name";
-    input.classList.add("new-project-input");
+    input.classList.add("new-project-input"); // !!!
+    if (edit) input.value = project.name;
 
     const minDate = new Date().toJSON().slice(0, 10);
 
@@ -96,7 +121,8 @@ export function projectNameInput() {
     inputDate.type = "date";
     inputDate.name = "project_date";
     inputDate.min = minDate;
-    inputDate.classList.add("project-date");
+    inputDate.classList.add("project-date"); // !!!
+    if (edit) inputDate.value = project.deadline;
 
     inputDiv.appendChild(input);
     inputDiv.appendChild(inputDate);
@@ -104,7 +130,7 @@ export function projectNameInput() {
     return inputDiv;
 }
 
-export function createTaskInput() {
+export function createTaskInput(edit, task) {
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("input-div");
     const input = document.createElement("input");
@@ -116,13 +142,15 @@ export function createTaskInput() {
     input.minLength = 1;
     input.required = true;
     input.name = "task_name";
-    input.classList.add("new-task-input");
+    input.classList.add("new-task-input"); // !!!
+    if (edit) input.value = task.name;
     
     const descriptionInput = document.createElement("textarea");
     descriptionInput.classList.add("description-input");
     descriptionInput.classList.add("hidden");
     descriptionInput.name = "task_desc";
-    descriptionInput.placeholder = "Description...";
+    descriptionInput.placeholder = "Description..."; // !!!
+    if (edit) descriptionInput.value = task.desc;
 
     descriptionInput.addEventListener("input", () => {
             descriptionInput.style.height = "auto";
@@ -154,7 +182,8 @@ export function createTaskInput() {
     inputDate.classList.add("date-input");
     inputDate.type = "date";
     inputDate.name = "task_date";
-    inputDate.min = minDate;
+    inputDate.min = minDate; // !!!
+    if (edit) inputDate.value = task.deadline;
 
     const prioritySelect = document.createElement("select");
     prioritySelect.classList.add("priority-select");
@@ -165,7 +194,7 @@ export function createTaskInput() {
         let option = document.createElement("option");
         option.value = selectOptions[i];
         option.text = selectOptions[i];
-        if (selectOptions[i] == "normal") option.selected = true;
+        if ((!edit && selectOptions[i] == "normal") || (edit && selectOptions[i] == task.priority)) option.selected = true; // !!!
         prioritySelect.appendChild(option);
     }
 
