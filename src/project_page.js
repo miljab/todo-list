@@ -1,5 +1,5 @@
 import { buildProjectsListPage } from './projects_list_page';
-import {loadProjects, updateProjectsLocalStorage, daysToDeadline, deleteProject} from './project_controller';
+import {loadProjects, updateProjectsLocalStorage, daysToDeadline, deleteProject, sortTasks} from './project_controller';
 import backIcon from './images/back.png';
 import editIcon from './images/edit.png';
 import alertIcon from './images/alert.png';
@@ -126,10 +126,9 @@ export function buildProjectPage(index) {
             }
 
             project.tasks[i].changeStatus();
-            project.checkStatus();
             projects[index] = project;
             updateProjectsLocalStorage(projects);
-            buildProjectPage(index);
+            buildProjectPage(checkIndex(project, index));
         });
 
         const taskDeadline = document.createElement("span");
@@ -158,10 +157,9 @@ export function buildProjectPage(index) {
 
         removeTaskButton.addEventListener("click", () => {
             project.tasks.splice(i, 1);
-            project.checkStatus();
             projects[index] = project;
             updateProjectsLocalStorage(projects);
-            buildProjectPage(index);
+            buildProjectPage(checkIndex(project, index));
         });
 
         const descDiv = document.createElement("div");
@@ -238,4 +236,26 @@ function createModal(index) {
     dialog.appendChild(buttonsDiv);
 
     return dialog;
+}
+
+function checkIndex(project, index) {
+    const projects = loadProjects();
+    project.done = false;
+
+    project.tasks.sort(sortTasks);
+
+    for (let j = 0; j < projects.length; j++) {
+        projects[j].done = false;
+    }
+
+    if (JSON.stringify(projects[index]) == JSON.stringify(project)) {
+        return index;
+    }
+    else {
+        for (let i = 0; i < projects.length; i++) {
+            if (JSON.stringify(projects[i]) == JSON.stringify(project)) {
+                return i;
+            }
+        }
+    }
 }

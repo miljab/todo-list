@@ -38,13 +38,14 @@ export function buildProjectsListPage() {
 
         let projectTitle = document.createElement("h2");
         projectTitle.textContent = projects[i].name;
+        if (projects[i].done) projectTitle.classList.add("task-done");
         projectDiv.appendChild(projectTitle);
 
         let projectDate = document.createElement("span");
         projectDate.textContent = projects[i].deadline;
         projectDate.classList.add("project-date-span");
 
-        if (projects[i].deadline != "" && daysToDeadline(projects[i].deadline) < 1) {
+        if (projects[i].deadline != "" && daysToDeadline(projects[i].deadline) < 1 && !projects[i].done) {
             projectDate.style.color = "red";
             const alertImg = document.createElement("img");
             alertImg.src = alertIcon;
@@ -60,6 +61,7 @@ export function buildProjectsListPage() {
         for (let j = 0; j < projects[i].tasks.length; j++) {
             let task = document.createElement("li");
             task.textContent = projects[i].tasks[j].name;
+            if (projects[i].tasks[j].done) task.classList.add("task-done");
             projectTasks.appendChild(task);
         }
 

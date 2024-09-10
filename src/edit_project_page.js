@@ -1,4 +1,4 @@
-import { formManager, projectNameInput, createTaskInput } from "./add_project_page";
+import { formManager } from "./add_project_page";
 import { buildProjectPage } from "./project_page";
 import backIcon from './images/back.png';
 

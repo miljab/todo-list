@@ -53,8 +53,10 @@ export function loadProjects() {
         }
         tasks.sort(sortTasks);
         projects[i] = Project(projects[i].name, projects[i].deadline, tasks, projects[i].done);
+        projects[i].checkStatus();
     }
 
+    projects.sort(sortProjects);
     return projects;
 }
 
@@ -72,7 +74,7 @@ export function daysToDeadline(date) {
     return diffDays;
 }
 
-function sortTasks(a, b) {
+export function sortTasks(a, b) {
     const value = {
         "low": 0,
         "normal": 1,
@@ -82,6 +84,15 @@ function sortTasks(a, b) {
     };
 
     return (value[b.priority] + value[b.done]) - (value[a.priority] + value[a.done]);
+}
+
+function sortProjects(a, b) {
+    const value = {
+        false: 1,
+        true: 0,
+    };
+
+    return value[b.done] - value[a.done];
 }
 
 export function deleteProject(index) {

@@ -99,7 +99,7 @@ export function formManager(index) {
     return form;
 }
 
-export function projectNameInput(edit, project) {
+function projectNameInput(edit, project) {
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("project-name-input-div");
     const input = document.createElement("input");
@@ -130,7 +130,7 @@ export function projectNameInput(edit, project) {
     return inputDiv;
 }
 
-export function createTaskInput(edit, task) {
+function createTaskInput(edit, task) {
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("input-div");
     const input = document.createElement("input");
