@@ -205,8 +205,14 @@ export function createTaskInput(edit, task) {
 
     removeTaskButton.addEventListener("click", () => {
         removeTaskButton.parentElement.remove();
-    })
+    });
 
+    const status = document.createElement("input");
+    status.classList.add("hidden");
+    status.type = "checkbox";
+    status.name = "status";
+    if (edit) status.checked = task.done;
+    else status.checked = false;
 
     inputDiv.appendChild(input);
     inputDiv.appendChild(descriptionButton);
@@ -214,6 +220,7 @@ export function createTaskInput(edit, task) {
     inputDiv.appendChild(prioritySelect);
     inputDiv.appendChild(removeTaskButton);
     inputDiv.appendChild(descriptionInput);
+    inputDiv.appendChild(status);
 
     return inputDiv;
 }

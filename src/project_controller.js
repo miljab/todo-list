@@ -28,11 +28,11 @@ export function saveProjectToLocalStorage(elements, index = 0) {
 
     if (elements["task_name"].length != undefined) {
         for (let i = 0; i < elements["task_name"].length; i++) {
-            let newTask = Task(elements["task_name"][i].value, elements["task_desc"][i].value, elements["task_prio"][i].value, elements["task_date"][i].value, false);
+            let newTask = Task(elements["task_name"][i].value, elements["task_desc"][i].value, elements["task_prio"][i].value, elements["task_date"][i].value, elements["status"][i].checked);
             tasks.push(newTask);
         }
     } else {
-        let newTask = Task(elements["task_name"].value, elements["task_desc"].value, elements["task_prio"].value, elements["task_date"].value, false);
+        let newTask = Task(elements["task_name"].value, elements["task_desc"].value, elements["task_prio"].value, elements["task_date"].value, elements["status"].checked);
             tasks.push(newTask);
     }
    
@@ -40,7 +40,7 @@ export function saveProjectToLocalStorage(elements, index = 0) {
     const newProject = Project(elements["project_name"].value, elements["project_date"].value, tasks, false);
 
     projects.splice(index, 0, newProject);
-    localStorage.setItem("projects", JSON.stringify(projects));
+    updateProjectsLocalStorage(projects);
 }
 
 export function loadProjects() {
