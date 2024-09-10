@@ -3,6 +3,8 @@ import {loadProjects, updateProjectsLocalStorage, daysToDeadline, deleteProject}
 import backIcon from './images/back.png';
 import editIcon from './images/edit.png';
 import alertIcon from './images/alert.png';
+import markDown from './images/chevron-down.png';
+import markUp from './images/chevron-up.png';
 
 export function buildProjectPage(index) {
     const header = document.querySelector("header");
@@ -142,7 +144,7 @@ export function buildProjectPage(index) {
             } else taskDeadline.style.color = "gray";
         }
 
-        taskDiv.appendChild(taskDeadline);
+        
 
         const removeTaskButtonContainer = document.createElement("div");
         removeTaskButtonContainer.classList.add("remove-task-button-container");
@@ -159,9 +161,6 @@ export function buildProjectPage(index) {
             buildProjectPage(index);
         });
 
-        removeTaskButtonContainer.appendChild(removeTaskButton);
-        taskDiv.appendChild(removeTaskButtonContainer);
-
         const descDiv = document.createElement("div");
         descDiv.classList.add("desc-div");
         descDiv.classList.add("hidden");
@@ -169,17 +168,29 @@ export function buildProjectPage(index) {
         if (project.tasks[i].desc != "") {
             descDiv.textContent = project.tasks[i].desc;
 
+            const descMark = document.createElement("img");
+            descMark.classList.add("desc-mark");
+            descMark.src = markDown;
+            taskName.appendChild(descMark);
+
             taskName.addEventListener("click", () => {
                 if (descDiv.classList.contains("hidden")) {
                     descDiv.classList.remove("hidden");
                     descDiv.classList.add("shown");
+                    descMark.src = markUp;
                 } else {
                     descDiv.classList.remove("shown");
                     descDiv.classList.add("hidden");
+                    descMark.src = markDown;
                 }
             });
         }
-        
+
+        taskDiv.appendChild(taskDeadline);
+
+        removeTaskButtonContainer.appendChild(removeTaskButton);
+        taskDiv.appendChild(removeTaskButtonContainer);
+
         taskDiv.appendChild(descDiv);
 
         tasksSection.appendChild(taskDiv);

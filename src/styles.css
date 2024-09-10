@@ -274,6 +274,10 @@ ul {
     background-color: inherit;
 }
 
+.remove-task-button:hover {
+    cursor: pointer;
+}
+
 .task-done {
     text-decoration: line-through;
     color: rgb(124, 124, 124);
@@ -453,6 +457,9 @@ ul {
 
 .task-name-span {
     font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .task-name-span:hover {
@@ -461,4 +468,8 @@ ul {
 
 .project-date-span .alert-img {
     width: 20px;
+}
+
+.desc-mark {
+    width: 50px;
 }
