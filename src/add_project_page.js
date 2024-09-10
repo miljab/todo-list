@@ -36,7 +36,7 @@ export function buildNewProjectPage() {
 
 };
 
-function formManager() {
+export function formManager() {
     const form = document.createElement("form");
     form.id = "new-project-form";
 
@@ -75,7 +75,7 @@ function formManager() {
     return form;
 }
 
-function projectNameInput() {
+export function projectNameInput() {
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("project-name-input-div");
     const input = document.createElement("input");
@@ -104,7 +104,7 @@ function projectNameInput() {
     return inputDiv;
 }
 
-function createTaskInput() {
+export function createTaskInput() {
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("input-div");
     const input = document.createElement("input");

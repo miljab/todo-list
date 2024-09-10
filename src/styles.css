@@ -427,7 +427,7 @@ ul {
 
 .task-div {
     display: grid;
-    grid-template-columns: 30px 850px 1fr 50px;
+    grid-template-columns: 30px 10fr 90px 50px;
     gap: 10px;
     align-items: center;
 }

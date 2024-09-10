@@ -4,7 +4,7 @@ import { buildProjectPage } from "./project_page";
 import alertIcon from './images/alert.png';
 
 export function buildProjectsListPage() {
-    let projects = loadProjects();
+    const projects = loadProjects();
 
     const header = document.querySelector("header");
     header.textContent = "";

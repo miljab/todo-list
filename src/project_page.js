@@ -13,8 +13,8 @@ export function buildProjectPage(index) {
         header.classList.add("header-with-back");
     }
 
-    let projects = loadProjects();
-    let project = projects[index];
+    const projects = loadProjects();
+    const project = projects[index];
 
     const dialog = createModal(index);
 
@@ -217,8 +217,9 @@ function createModal(index) {
     confirmButton.textContent = "Confirm";
 
     confirmButton.addEventListener("click", () => {
-        deleteProject(index)
+        deleteProject(index);
         dialog.close();
+        buildProjectsListPage();
     });
 
     const cancelButton = document.createElement("button");

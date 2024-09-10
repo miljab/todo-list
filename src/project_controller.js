@@ -23,8 +23,8 @@ function Task(name, desc, priority, deadline, done) {
 }
 
 export function saveProjectToLocalStorage(elements) {
-    let projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
-    let tasks = [];
+    const projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
+    const tasks = [];
 
     if (elements["task_name"].length != undefined) {
         for (let i = 0; i < elements["task_name"].length; i++) {
@@ -37,7 +37,7 @@ export function saveProjectToLocalStorage(elements) {
     }
    
 
-    let newProject = Project(elements["project_name"].value, elements["project_date"].value, tasks, false);
+    const newProject = Project(elements["project_name"].value, elements["project_date"].value, tasks, false);
 
     projects.push(newProject);
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -46,7 +46,7 @@ export function saveProjectToLocalStorage(elements) {
 }
 
 export function loadProjects() {
-    let projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
+    const projects = !localStorage.getItem("projects") ? [] : JSON.parse(localStorage.getItem("projects"));
 
     for (let i = 0; i < projects.length; i++) {
         let tasks = projects[i].tasks;
@@ -87,8 +87,7 @@ function sortTasks(a, b) {
 }
 
 export function deleteProject(index) {
-    let projects = loadProjects();
+    const projects = loadProjects();
     projects.splice(index, 1);
     updateProjectsLocalStorage(projects);
-    buildProjectsListPage();
 }
